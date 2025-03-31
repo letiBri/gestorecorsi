@@ -10,5 +10,17 @@ class Controller:
 
     def fillddCodins(self):
         for cod in self._model.getCodins():
-            self._view.ddCodins.options.append(cod)
+            self._view.ddCodins.options.append(ft.dropdown.Option(cod))
+
+    def handlePrintCorsiPD(self, e):
+        pass
+
+    def handlePrintIscrittiCorsiPD(self, e):
+        pass
+
+    def handlePrintIscrittiCodins(self, e):
+        pass
+
+    def handlePrintCDSCodins(self, e):
+        pass
 

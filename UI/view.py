@@ -20,21 +20,28 @@ class View(ft.UserControl):
         self.btnPrintIscrittiCorsiPD = None
         self.btnPrintIscrittiCodins = None
         self.btnPrintCDSCodins = None
+        self.lvTxtOut = None
 
     def load_interface(self):
         # title
         self._title = ft.Text("Hello World", color="blue", size=24)
         self._page.controls.append(self._title)
 
-        self.ddPD = ft.Dropdown(label="Periodo Didattico", options=["I", "II"])
-        self.ddCodins = ft.Dropdown(label="Corso")
+        self.ddPD = ft.Dropdown(label="Periodo Didattico", options=[ft.dropdown.Option("I"), ft.dropdown.Option("II")], width=200)
+        self.ddCodins = ft.Dropdown(label="Corso", width=200)
         self._controller.fillddCodins()
 
-        self.btnPrintCorsiPD = None
-        self.btnPrintIscrittiCorsiPD = None
-        self.btnPrintIscrittiCodins = None
-        self.btnPrintCDSCodins = None
+        self.btnPrintCorsiPD = ft.ElevatedButton(text="Stampa corsi", on_click=self._controller.handlePrintCorsiPD, width=300)
+        self.btnPrintIscrittiCorsiPD = ft.ElevatedButton(text="Stampa numero iscritti", on_click=self._controller.handlePrintIscrittiCorsiPD, width=300)
+        self.btnPrintIscrittiCodins = ft.ElevatedButton(text="Stampa iscritti al corso", on_click=self._controller.handlePrintIscrittiCodins, width=300)
+        self.btnPrintCDSCodins = ft.ElevatedButton(text="Stampa CDS afferenti", on_click=self._controller.handlePrintCDSCodins, width=300)
 
+        self.lvTxtOut = ft.ListView(expand=True)
+
+        row1 = ft.Row([self.ddPD, self.btnPrintCorsiPD, self.btnPrintIscrittiCorsiPD])
+        row2 = ft.Row([self.ddCodins, self.btnPrintIscrittiCodins, self.btnPrintCDSCodins])
+
+        self._page.add(self._title, row1, row2, self.lvTxtOut)
 
         self._page.update()
 
