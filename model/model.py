@@ -7,3 +7,9 @@ class Model:
 
     def getCodins(self):
         return DAO.getCodins()
+
+    def getAllCorsi(self):
+        return DAO.getAllCorsi()
+
+    def getCorsiPD(self, pd):
+        return DAO.getCorsiPD(pd)

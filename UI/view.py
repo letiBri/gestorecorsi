@@ -1,4 +1,5 @@
 import flet as ft
+from flet_core.alignment import center
 
 
 class View(ft.UserControl):
@@ -24,11 +25,9 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
-        self._page.controls.append(self._title)
-
+        self._title = ft.Text("Gestore corsi edizione 2025", text_align=center, color="blue", size=24)
         self.ddPD = ft.Dropdown(label="Periodo Didattico", options=[ft.dropdown.Option("I"), ft.dropdown.Option("II")], width=200)
-        self.ddCodins = ft.Dropdown(label="Corso", width=200)
+        self.ddCodins = ft.Dropdown(label="Corso", width=200, on_change=self._controller.ddCodinsSelected)
         self._controller.fillddCodins()
 
         self.btnPrintCorsiPD = ft.ElevatedButton(text="Stampa corsi", on_click=self._controller.handlePrintCorsiPD, width=300)
