@@ -8,18 +8,21 @@ class DAO():
     @staticmethod
     def getCodins():
         cnx = DBConnect.get_connection()
-        cursor = cnx.cursor(dictionary=True)
-        query = """select c.codins
-                    from corso c"""
-        cursor.execute(query)
-
         res = []
-        for row in cursor:
-            res.append(row["codins"])
+        if cnx is None:
+            return res
+        else:
+            cursor = cnx.cursor(dictionary=True)
+            query = """select c.codins
+                        from corso c"""
+            cursor.execute(query)
 
-        cursor.close()
-        cnx.close()
-        return res
+            for row in cursor:
+                res.append(row["codins"])
+
+            cursor.close()
+            cnx.close()
+            return res
 
     @staticmethod
     def getAllCorsi():
@@ -51,7 +54,6 @@ class DAO():
 
             cursor.execute(query, (pd, ))
 
-            res = []
             for row in cursor:
                 res.append(Corso(**row))
 
@@ -74,7 +76,6 @@ class DAO():
 
             cursor.execute(query, (pd,))
 
-            res = []
             for row in cursor:
                 res.append((Corso(row["codins"], row["crediti"], row["nome"], row["pd"]), row["n"])) #restituisco una tupla dove il primo elemento è il corso mentre il secondo elemento è il contatore
 
@@ -96,7 +97,6 @@ class DAO():
 
             cursor.execute(query, (codins,))
 
-            res = []
             for row in cursor:
                 res.append(Studente(**row))
 
@@ -119,7 +119,6 @@ class DAO():
 
             cursor.execute(query, (codins,))
 
-            res = []
             for row in cursor:
                 res.append((row["CDS"], row["n"]))
 
